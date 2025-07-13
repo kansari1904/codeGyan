@@ -80,7 +80,7 @@ const otpTemplate = (otp, name) => {
 				Once your account is verified, you will have access to our platform and its features.</p>
 			</div>
 			<div class="support">If you have any questions or need assistance, please feel free to reach out to us at <a
-					href="mailto:gadeaniruddha2@gmail.com">gadeaniruddha2@gmail.com</a>. We are here to help!</div>
+					href="mailto:kansari1904@gmail.com">kansari1904@gmail.com</a>. We are here to help!</div>
 		</div>
 	</body>
 	

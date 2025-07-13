@@ -85,11 +85,20 @@ const Navbar = () => {
 
     return (
         <nav className={`z-[10] flex h-14 w-full items-center justify-center border-b-[1px] border-b-richblack-700 text-white translate-y-0 transition-all ${showNavbar} `}>
-             {/* <nav className={` fixed flex items-center justify-center w-full h-16 z-[10] translate-y-0 transition-all text-white ${showNavbar}`}> */}
+            {/* <nav className={` fixed flex items-center justify-center w-full h-16 z-[10] translate-y-0 transition-all text-white ${showNavbar}`}> */}
             <div className='flex w-11/12 max-w-maxContent items-center justify-between '>
                 {/* logo */}
                 <Link to="/">
-                    <img src={studyNotionLogo} width={160} height={42} loading='lazy' />
+                    <div className="flex items-center space-x-2">
+                        <div className="w-10 h-10 bg-gradient-to-r from-yellow-100 to-yellow-100 rounded-full flex items-center justify-center">
+                            <span className="text-white font-bold text-xl">C</span>
+                        </div>
+                        <div>
+                            <h1 className= "text-xl font-bold $ text-gray-800 text-white">
+                                CodeGyan
+                            </h1>
+                        </div>
+                    </div>
                 </Link>
 
                 {/* Nav Links - visible for only large devices*/}

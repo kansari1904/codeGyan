@@ -6,12 +6,12 @@ const mailSender = async (email, title, body) => {
             host: process.env.MAIL_HOST,
             auth: {
                 user: process.env.MAIL_USER,
-                pass: process.env.MAIL_PASS
+                pass: process.env.MAIL_PASS,
             }
         });
 
         const info = await transporter.sendMail({
-            from: 'StudyNotion || by Aniruddha Gade',
+            from: 'CodeGyan || by Khalid Ansari',
             to: email,
             subject: title,
             html: body
@@ -21,8 +21,10 @@ const mailSender = async (email, title, body) => {
         return info;
     }
     catch (error) {
-        console.log('Error while sending mail (mailSender) - ', email);
-    }
+    console.log(' Error while sending mail (mailSender) to:', email);
+    console.error('Error details:', error);
+}
+
 }
 
 module.exports = mailSender;

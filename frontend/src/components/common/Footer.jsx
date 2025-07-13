@@ -181,7 +181,7 @@ const Footer = () => {
                 Khalid Ansari
               </Link>
             </div>
-            <span> © 2024 Studynotion</span>
+            <span> © 2024 CodeGyan</span>
           </div>
 
           <div className="flex items-center">

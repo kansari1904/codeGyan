@@ -3,17 +3,17 @@ import { useEffect, useState } from "react";
 import { Route, Routes, useLocation, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import Home from "./pages/Home"
-import Login from "./pages/Login"
-import Signup from "./pages/Signup"
-import ForgotPassword from "./pages/ForgotPassword";
-import UpdatePassword from "./pages/UpdatePassword";
-import VerifyEmail from "./pages/VerifyEmail";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
-import PageNotFound from "./pages/PageNotFound";
-import CourseDetails from './pages/CourseDetails';
-import Catalog from './pages/Catalog';
+import Home from "./pages/Home.jsx"
+import Login from "./pages/Login.jsx"
+import Signup from "./pages/Signup.jsx"
+import ForgotPassword from "./pages/ForgotPassword.jsx";
+import UpdatePassword from "./pages/UpdatePassword.jsx";
+import VerifyEmail from "./pages/VerifyEmail.jsx";
+import About from "./pages/About.jsx";
+import Contact from "./pages/Contact.jsx";
+import PageNotFound from "./pages/PageNotFound.jsx";
+import CourseDetails from './pages/CourseDetails.jsx';
+import Catalog from './pages/Catlog.jsx';
  
 import Navbar from "./components/common/Navbar"
 

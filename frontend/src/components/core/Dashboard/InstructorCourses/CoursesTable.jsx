@@ -15,7 +15,7 @@ import { formatDate } from "../../../../services/formatDate"
 import { deleteCourse, fetchInstructorCourses, } from "../../../../services/operations/courseDetailsAPI"
 import { COURSE_STATUS } from "../../../../utils/constants"
 import ConfirmationModal from "../../../common/ConfirmationModal"
-import Img from './../../../common/Img';
+import Img from '../../../common/Img';
 import toast from 'react-hot-toast'
 
 

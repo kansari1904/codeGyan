@@ -396,6 +396,33 @@ exports.getInstructorCourses = async (req, res) => {
     }
 }
 
+// ================ Show All Categories ================
+exports.showAllCategories = async (req, res) => {
+  try {
+    const allCategories = await Category.find({}, { name: true, _id: true });
+
+    if (!allCategories || allCategories.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No categories found",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: allCategories,
+      message: "All categories fetched successfully",
+    });
+  } catch (error) {
+    console.log("SHOW_ALL_CATEGORIES ERROR:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error while fetching categories",
+      error: error.message,
+    })
+  }
+}
+
 
 
 // ================ Delete the Course ================

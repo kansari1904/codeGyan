@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
 import ConfirmationModal from './../../../common/ConfirmationModal';
-import { deleteProfile } from "../../../../services/operations/SettingsAPI"
+import { deleteProfile } from "../../../../services/operations/settingsAPI"
 
 export default function DeleteAccount() {
 

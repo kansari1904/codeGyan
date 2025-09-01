@@ -7,6 +7,8 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors');
 require('dotenv').config();
 
+const PORT = process.env.PORT || 5000;
+
 // connection to DB and cloudinary
 const { connectDB } = require('./config/database');
 const { cloudinaryConnect } = require('./config/cloudinary');
@@ -19,7 +21,7 @@ const courseRoutes = require('./routes/course');
 
 
 // middleware 
-app.use(express.json()); // to parse json body
+app.use(express.json()); 
 app.use(cookieParser());
 app.use(
     cors({
@@ -36,11 +38,9 @@ app.use(
 )
 
 
-const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-    console.log(`Server Started on PORT ${PORT}`);
-});
+
+
 
 // connections
 connectDB();
@@ -63,3 +63,7 @@ app.get('/', (req, res) => {
     <p>Everything is OK</p>
     </div>`);
 })
+
+app.listen(PORT, () => {
+    console.log(`Server Started on PORT ${PORT}`);
+});

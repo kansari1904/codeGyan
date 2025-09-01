@@ -1,15 +1,20 @@
 import { useEffect, useRef, useState } from "react"
 import { useDropzone } from "react-dropzone"
 import { FiUploadCloud } from "react-icons/fi"
-import { useSelector } from "react-redux"
-
-import "video-react/dist/video-react.css"
 import { Player } from "video-react"
 
+import "video-react/dist/video-react.css"
 
-
-export default function Upload({ name, label, register, setValue, errors, video = false, viewData = null, editData = null, }) {
-  // const { course } = useSelector((state) => state.course)
+export default function Upload({
+  name,
+  label,
+  register,
+  setValue,
+  errors,
+  video = false,
+  viewData = null,
+  editData = null,
+}) {
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewSource, setPreviewSource] = useState(viewData ? viewData : editData ? editData : "")
   const inputRef = useRef(null)
@@ -22,15 +27,15 @@ export default function Upload({ name, label, register, setValue, errors, video 
     }
   }
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+  const { getRootProps, isDragActive } = useDropzone({
     accept: !video
       ? { "image/*": [".jpeg", ".jpg", ".png"] }
       : { "video/*": [".mp4"] },
+    noClick: true, // disable default click handling, we’ll handle manually
     onDrop,
   })
 
   const previewFile = (file) => {
-    // console.log(file)
     const reader = new FileReader()
     reader.readAsDataURL(file)
     reader.onloadend = () => {
@@ -40,12 +45,17 @@ export default function Upload({ name, label, register, setValue, errors, video 
 
   useEffect(() => {
     register(name, { required: true })
-  }, [register])
-
+  }, [register, name])
 
   useEffect(() => {
     setValue(name, selectedFile)
-  }, [selectedFile, setValue])
+  }, [selectedFile, name, setValue])
+
+  const handleClick = () => {
+    if (!viewData) {
+      inputRef.current?.click()
+    }
+  }
 
   return (
     <div className="flex flex-col space-y-2">
@@ -54,8 +64,10 @@ export default function Upload({ name, label, register, setValue, errors, video 
       </label>
 
       <div
+        {...getRootProps()}
+        onClick={handleClick}
         className={`${isDragActive ? "bg-richblack-600" : "bg-richblack-700"}
-         flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
+          flex min-h-[250px] cursor-pointer items-center justify-center rounded-md border-2 border-dotted border-richblack-500`}
       >
         {previewSource ? (
           <div className="flex w-full flex-col p-6">
@@ -72,7 +84,8 @@ export default function Upload({ name, label, register, setValue, errors, video 
             {!viewData && (
               <button
                 type="button"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation()
                   setPreviewSource("")
                   setSelectedFile(null)
                   setValue(name, null)
@@ -84,11 +97,7 @@ export default function Upload({ name, label, register, setValue, errors, video 
             )}
           </div>
         ) : (
-          <div
-            className="flex w-full flex-col items-center p-6"
-            {...getRootProps()}
-          >
-            <input {...getInputProps()} ref={inputRef} />
+          <div className="flex w-full flex-col items-center p-6">
             <div className="grid aspect-square w-14 place-items-center rounded-full bg-pure-greys-800">
               <FiUploadCloud className="text-2xl text-yellow-50" />
             </div>
@@ -97,13 +106,28 @@ export default function Upload({ name, label, register, setValue, errors, video 
               <span className="font-semibold text-yellow-50">Browse</span> a
               file
             </p>
-            <ul className="mt-10 flex list-disc justify-between space-x-12 text-center  text-xs text-richblack-200">
+            <ul className="mt-10 flex list-disc justify-between space-x-12 text-center text-xs text-richblack-200">
               <li>Aspect ratio 16:9</li>
               <li>Recommended size 1024x576</li>
             </ul>
           </div>
         )}
       </div>
+
+      {/* Our manual hidden input */}
+      <input
+        type="file"
+        accept={!video ? "image/*" : "video/*"}
+        ref={inputRef}
+        style={{ display: "none" }}
+        onChange={(e) => {
+          const file = e.target.files[0]
+          if (file) {
+            previewFile(file)
+            setSelectedFile(file)
+          }
+        }}
+      />
 
       {errors[name] && (
         <span className="ml-2 text-xs tracking-wide text-pink-200">

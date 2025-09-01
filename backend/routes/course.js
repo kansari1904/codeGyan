@@ -96,9 +96,8 @@ router.post("/updateCourseProgress", auth, isStudent, updateCourseProgress)
 
 
 
-// ********************************************************************************************************
-//                                      Category routes (Only by Admin)
-// ********************************************************************************************************
+
+//  Category routes (Only by Admin)
 // Category can Only be Created by Admin
 
 router.post('/createCategory', auth, isAdmin, createCategory);
